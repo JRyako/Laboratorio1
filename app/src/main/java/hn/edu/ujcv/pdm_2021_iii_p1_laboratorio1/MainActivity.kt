@@ -3,6 +3,8 @@ package hn.edu.ujcv.pdm_2021_iii_p1_laboratorio1
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import java.util.*
+import android.content.Intent
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,8 +15,8 @@ class MainActivity : AppCompatActivity() {
     object Main {
         fun mostrarMenu() {
             println("App")
-            println("1- ENEE")
-            println("2- SANAA")
+            println("1- Cobrar ENEE")
+            println("2- Cobrar SANAA")
             println("3- RecargaCLARO")
             println("4- RecargaTIGO")
             println("5- DebitarCuenta")
