@@ -3,7 +3,6 @@ package hn.edu.ujcv.pdm_2021_iii_p1_laboratorio1
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import java.util.*
-import android.content.Intent
 
 
 class MainActivity : AppCompatActivity() {
@@ -52,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
 
 }
