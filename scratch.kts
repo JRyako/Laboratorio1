@@ -1,3 +1,5 @@
+import kotlin.system.exitProcess
+
 class MainClass(){
     fun main(args: Array<String>){
 
@@ -11,25 +13,27 @@ class MainClass(){
             println("5- Debitar Cuenta")
             println("6- Acreditar Cuenta")
 
-            println("¿Qué transacción desea realizar?")
+            println("¿Qué transacción desea hacer?")
             var respuestaUser = readLine()!!.toInt()
 
             // switch de opciones
             when(respuestaUser){
                 1 -> enee()
                 2 -> sanaa()
-                3 -> menuTigo()
-                4 -> menuClaro()
-                5 -> debitarCuenta()
-                6 -> acreditarCuenta()
-                else -> println("La opción elegida no es válida, intete nuevamente")
+                3 -> menuDeTigo()
+                4 -> menuDeClaro()
+                5 -> debiCuenta()
+                6 -> acrediCuenta()
+                else -> println("La opción elegida no es válida, Elija una Upción Nuevamene")
             }
 
             println("¿Desea realizar otra opcion? (S = si / N = no)")
             var seguir = readLine().toString()
-        }   while (seguir.equals("S")||seguir.equals("s"))
 
-        println("¡Vuelva pronto!")
+            if (seguir.equals("n")||(seguir.equals("N"))){
+                 println("Adios")
+            }
+        }   while (seguir.equals("S")||seguir.equals("s"))
 
     }
 
@@ -38,43 +42,42 @@ class MainClass(){
 
     // ENEE
     fun enee(){
-        val pagarEnee1 = PagarENEE()
+        val pagar_Enee_1 = PagarENEE()
         var contador = 0
         var contador2 = 0
 
         println("Ha seleccionado: ENEE")
-        println("Ingrese el nombre del cliente/propietario: ")
-        pagarEnee1.nombreCliente = readLine().toString()
-
+        println("Ingrese el nombre del cliente: ")
+        pagar_Enee_1.nombreCliente = readLine().toString()
 
         do {
             contador2 = 0
             println("Ingrese el código de cliente: ")
-            pagarEnee1.codigoDeCliente = readLine().toString().toInt()
+            pagar_Enee_1.cod_Cliente = readLine().toString().toInt()
 
-            if (pagarEnee1.codigoDeCliente <= 0){
-                println("Codigo de cliente no válido")
-                pagarEnee1.codigoDeCliente = 0
+            if (pagar_Enee_1.cod_Cliente <= 0){
+                println("Codigo de cliente inválido")
+                pagar_Enee_1.cod_Cliente = 0
                 contador2++
             }
         }   while (contador2 > 0)
         println("Ingrese la dirección de residencia del cliente: ")
-        pagarEnee1.direccion = readLine().toString()
+        pagar_Enee_1.direccion = readLine().toString()
 
         do{
             contador = 0
             println("Por favor, ingrese el consumo en kw/h del cliente:")
-            pagarEnee1.consumo = readLine().toString().toDouble()
+            pagar_Enee_1.consumo = readLine().toString().toDouble()
 
-            if (pagarEnee1.consumo < 0){
+            if (pagar_Enee_1.consumo < 0){
                 println("El consumo no puede ser menor a 0")
-                pagarEnee1.consumo = 0.0
+                pagar_Enee_1.consumo = 0.0
                 contador++
             }
         }   while (contador > 0)
 
-        pagarEnee1.totalPagar = pagarEnee1.cobro()
-        println("El total a pagar es ${pagarEnee1.totalPagar}")
+        pagar_Enee_1.totalPagar = pagar_Enee_1.cobro()
+        println("El total a pagar es de ${pagar_Enee_1.totalPagar}")
 
         println("¿Desea realizar el pago en este momento? (S = si/N = no)")
         var opcion = readLine().toString()
@@ -82,72 +85,90 @@ class MainClass(){
         if (opcion.equals("s")||opcion.equals("S")){
 
             println("Ingrese la fecha actual:")
-            pagarEnee1.fechaDePago = readLine().toString()
-            println("El proceso ha sido realizado exitosamente: \n${pagarEnee1.imprimirRecibo()}")
+            pagar_Enee_1.fechaDePago = readLine().toString()
+            println("El proceso ha sido realizado exitosamente: \n${pagar_Enee_1.imprimirRecibo()}")
 
-        }   else    {
-            println("¡Hasta pronto!")
+        }   else {
+
+            if (opcion.equals("n")||(opcion.equals("N"))){
+                println("Esperamos su pago pronto.")
+            } else {
+                println("finalizando enee")
+            }
+
+         /* println("Respuesta Invalida, Ingrese una R para reinicia el tramite.")
+           var response = readLine().toString()
+
+           if (response.equals("r")||(response.equals("R"))) {
+             println("Reiniciando proceso...")
+             enee()
+             } else {
+             println("Se chingo esta wea")
+             }*/
         }
+        println("Adios")
     }
 
     // SANAA
     fun sanaa(){
-        val pagoSanaa1 = PagoSANAA()
+        val pago_sanaa1 = PagoSANAA()
         var contador = 0
         var contador2 = 0
 
         println("Ha seleccionado: SANAA")
         println("Ingrese el nombre del cliente:")
-        pagoSanaa1.nombreCliente = readLine().toString()
+        pago_sanaa1.nombreCliente = readLine().toString()
 
         do {
             contador2 = 0
             println("Ingrese el codigo del cliente:")
-            pagoSanaa1.codigoDeCliente = readLine().toString().toInt()
+            pago_sanaa1.cod_Cliente = readLine().toString().toInt()
 
-            if (pagoSanaa1.codigoDeCliente <= 0){
+            if (pago_sanaa1.cod_Cliente <= 0){
                 println("Codigo de cliente incorrecto")
-                pagoSanaa1.codigoDeCliente = 0
+                pago_sanaa1.cod_Cliente = 0
                 contador2++
             }
         }while (contador2 > 0)
 
         println("Ingrese la direccion de residencia del cliente")
-        pagoSanaa1.direccion = readLine().toString()
+        pago_sanaa1.direccion = readLine().toString()
 
 
         do{
             contador = 0
-            println("Ingrese el consumo en m^3 del cliente:")
-            pagoSanaa1.consumo = readLine().toString().toDouble()
+            println("Ingrese el consumo en mts^3  del cliente:")
+            pago_sanaa1.consumo = readLine().toString().toDouble()
 
-            if (pagoSanaa1.consumo < 0){
+            if (pago_sanaa1.consumo < 0){
                 println("El consumo no puede ser menor a 0")
-                pagoSanaa1.consumo = 0.0
+                pago_sanaa1.consumo = 0.0
                 contador++
             }
         }   while (contador > 0)
 
-        pagoSanaa1.totalPagar = pagoSanaa1.cobro()
-        println("El total a pagar es ${pagoSanaa1.totalPagar}")
+        pago_sanaa1.totalPagar = pago_sanaa1.cobro()
+        println("El total a pagar es de ${pago_sanaa1.totalPagar}")
 
         println("¿Desea realizar el pago en este momento? (S = si/N = no)")
         var opcion = readLine().toString()
 
         if (opcion.equals("s")||opcion.equals("S")){
             println("Ingrese la fecha actual:")
-            pagoSanaa1.fechaDePago = readLine().toString()
-            println("Proceso realizado exitosamente: \n${pagoSanaa1.imprimirRecibo()}")
-        }else{
-            println("¡Hasta pronto!")
+            pago_sanaa1.fechaDePago = readLine().toString()
+            println("Proceso realizado exitosamente: \n${pago_sanaa1.imprimirRecibo()}")
+        }   else {
+            println("Adios")
         }
     }
+
     var cliente1 = Cliente()
     var cliente2 = Cliente()
 
+    private val s = "==="
 
     // Recargas Tigo
-    fun menuTigo(){
+    fun menuDeTigo(){
         var respuesta = ""
         do{
             if (cliente1.numero == 0) {
@@ -155,7 +176,7 @@ class MainClass(){
                 var numero = readLine().toString().toInt()
                 cliente1.numero = numero
             }
-            println("**** Elija una opción a realizar ****")
+            println("***** Elija una opción a realizar *****")
             println("1. Recarga Tigo")
             println("2. Paquetigos")
             println("3. Super Recargas Tigos")
@@ -172,7 +193,7 @@ class MainClass(){
             println("¿Desea seguir usando el servicio? (S = si/N = no)")
             var respuesta = readLine().toString()
         }while(respuesta.equals("s")||respuesta.equals("S"))
-        println("¡Hasta pronto!")
+        println("Adios")
     }
 
 
@@ -222,7 +243,7 @@ class MainClass(){
     }
 
     // Recargas Claro
-    fun menuClaro(){
+    fun menuDeClaro(){
         var respuesta = ""
         do {
             if (cliente2.numero == 0) {
@@ -238,7 +259,7 @@ class MainClass(){
 
             var opcionClaro = readLine().toString().toInt()
             when (opcionClaro) {
-                1 -> paquetesClaro()
+                1 -> paquetesDeClaro()
                 2 -> promocion()
                 3 -> ilimitados()
                 4 -> entretenimientos()
@@ -247,12 +268,11 @@ class MainClass(){
             println("¿Desea seguir usando el servicio? (S = si/N = no)")
             var respuesta = readLine().toString()
         } while (respuesta.equals("s") || respuesta.equals("S"))
-        println("*Hasta pronto!")
+        println("Adios")
     }
 
-
     // Paquetes Claro
-    fun paquetesClaro(){
+    fun paquetesDeClaro(){
         println("*** Ingrese la cantidad de la recarga ***")
 
         var monto = readLine().toString().toInt()
@@ -260,7 +280,7 @@ class MainClass(){
         if (cliente2.monto <= 0) {
             println("Recarga no puede ser menor a 0")
         } else {
-            println("Recarga de Lps.${cliente2.monto} acreditada al numero ${cliente2.numero} con exito!")
+            println("Recarga de Lps.${cliente2.monto} acreditada al numero ${cliente2.numero} con exito")
         }
     }
 
@@ -284,8 +304,8 @@ class MainClass(){
         println("3. 4 Dias L.80")
         println("4. 7 Dias L.150")
 
-        var opcionIlimitado = readLine().toString().toInt()
-        when(opcionIlimitado){
+        var opcion_Ilimitado = readLine().toString().toInt()
+        when(opcion_Ilimitado){
             1-> println("Paquete de 3 horas ilimitadas comprado al numero ${cliente2.numero} con exito!")
             2-> println("Paquete de 2 dias ilimitadas comprado al numero ${cliente2.numero} con exito!")
             3-> println("Paquete de 4 dias ilimitadas comprado al numero ${cliente2.numero} con exito!")
@@ -297,34 +317,34 @@ class MainClass(){
     // Misc
     fun entretenimientos(){
         println("*** Elige tu paquete de entretenimiento ***")
-        println("1. Claro Drive")
+        println("1. Claro PlaView")
         println("2. Claro Musica")
 
         var opcionMisc = readLine().toString().toInt()
         when(opcionMisc){
-            1-> claroDrive()
-            2-> claroMusica()
+            1-> claro_PlayView()
+            2-> claro_Musica()
             else -> println("Opcion no valida.")
         }
     }
 
     // Drive
-    fun claroDrive(){
-        println("*** Selecciona tu paquete Claro Drive ***")
+    fun claro_PlayView(){
+        println("=== Selecciona tu paquete Claro PlayView ***")
         println("1. 25GB por L12.25 al mes")
         println("2. 75GB por L24.50 al mes")
 
         var opcion = readLine().toString().toInt()
         when(opcion){
-            1-> println("Disfruta tus 25GB de espacio de Claro Drive!")
-            2-> println("Disfruta tus 75GB de espacio de Claro Drive!")
+            1-> println("Disfruta tus 25GB de Reproducción de Vídeo en Claro PlaView")
+            2-> println("Disfruta tus 75GB de Reproducción de Vídeo en Claro PlaView")
             else -> println("Opcion no valida.")
         }
     }
 
     // Music
-    fun claroMusica() {
-        println("*** Selecciona tu plan de Claro Musica ***")
+    fun claro_Musica() {
+        println("=== Selecciona tu plan de Claro Musica ===")
         println("1. Suscripcion Semanal L.46.98")
         println("2. Suscripcion Mensual L.141.99")
 
@@ -336,12 +356,11 @@ class MainClass(){
         }
     }
 
-
     // Debitar Cuentas
     private val c1 = Cuenta()
     private val c2 = Cuenta()
 
-    private fun debitarCuenta(){
+    private fun debiCuenta(){
         c1.numeroCuenta = 123
         c2.numeroCuenta = 456
         var cont   : Int
@@ -387,7 +406,7 @@ class MainClass(){
     }
 
     // Acreditar a cuenta
-    private fun acreditarCuenta(){
+    private fun acrediCuenta(){
         c1.numeroCuenta = 123
         c2.numeroCuenta = 456
         var cont  : Int
@@ -436,7 +455,7 @@ MainClass().main(arrayOf(""))
 
 
 open class PagoPublico{
-    var codigoDeCliente: Int = 0
+    var cod_Cliente: Int = 0
     var nombreCliente  : String = ""
     var totalPagar     : Double = 0.0
     var direccion      : String = ""
@@ -454,7 +473,7 @@ open class PagoPublico{
     }
 
     open fun imprimirRecibo(): String{
-        return "*Nombre del cliente: $nombreCliente  *Código de cliente: $codigoDeCliente \n*Direccion del cliente: $direccion" +
+        return "*Nombre del cliente: $nombreCliente  *Código de cliente: $cod_Cliente \n*Direccion del cliente: $direccion" +
                 "\n*Fecha de Pago: $fechaDePago"
     }
 
